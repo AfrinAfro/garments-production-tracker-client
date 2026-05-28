@@ -6,14 +6,21 @@ const BuyerRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const { role, loading: roleLoading } = useUserRole();
 
+  // Loading state (auth or role check)
   if (loading || roleLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <p className="text-gray-600 text-lg">Loading...</p>
+      </div>
+    );
   }
 
+  // Not logged in OR wrong role
   if (!user || role !== "buyer") {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" replace />;
   }
 
+  // Authorized access
   return children;
 };
 
