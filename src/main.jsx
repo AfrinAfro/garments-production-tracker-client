@@ -2,20 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <h1>Garments Tracker App</h1>,
-  },
-]);
+import { Toaster } from "react-hot-toast";
+
+import QueryProvider from "./providers/QueryProvider";
+import AuthProvider from "./contexts/AuthContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <QueryProvider>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" />
+      </QueryProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
