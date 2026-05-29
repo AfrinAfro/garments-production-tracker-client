@@ -1,21 +1,52 @@
 import { Link } from "react-router-dom";
 
+import Container from "../shared/Container";
+
+import PrimaryButton from "../buttons/PrimaryButton";
+import SecondaryButton from "../buttons/SecondaryButton";
+
 const Navbar = () => {
   return (
-    <div className="w-full shadow-md bg-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
+    <div className="sticky top-0 z-50 backdrop-blur-xl border-b border-white/10 bg-[#030712]/80">
+      <Container>
+        <div className="h-20 flex items-center justify-between">
+          
+          <Link
+            to="/"
+            className="text-2xl font-black"
+          >
+            <span className="gradient-text">
+              GarmentsX
+            </span>
+          </Link>
 
-        <Link to="/" className="text-xl font-bold text-indigo-600">
-          ThreadLine
-        </Link>
+          <div className="hidden md:flex items-center gap-8 text-gray-300">
+            <Link to="/">Home</Link>
 
-        <div className="flex gap-6">
-          <Link to="/" className="hover:text-indigo-600">Home</Link>
-          <Link to="/all-products" className="hover:text-indigo-600">Products</Link>
-          <Link to="/login" className="hover:text-indigo-600">Login</Link>
+            <Link to="/products">
+              Products
+            </Link>
+
+            <Link to="/about">
+              About
+            </Link>
+
+            <Link to="/contact">
+              Contact
+            </Link>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Link to="/login">
+              <SecondaryButton text="Login" />
+            </Link>
+
+            <Link to="/register">
+              <PrimaryButton text="Get Started" />
+            </Link>
+          </div>
         </div>
-
-      </div>
+      </Container>
     </div>
   );
 };
