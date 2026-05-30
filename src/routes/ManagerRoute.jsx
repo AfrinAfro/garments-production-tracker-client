@@ -1,17 +1,42 @@
-import { Navigate } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+
+import Spinner from "../components/loaders/Spinner";
+
 import useAuth from "../hooks/useAuth";
-import useUserRole from "../hooks/useUserRole";
 
-const ManagerRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  const { role, loading: roleLoading } = useUserRole();
+import useManager from "../hooks/useManager";
 
-  if (loading || roleLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
+const ManagerRoute = ({
+  children,
+}) => {
+  const { user, loading } =
+    useAuth();
+
+  const [
+    isManager,
+    isManagerLoading,
+  ] = useManager();
+
+  const location = useLocation();
+
+  if (
+    loading ||
+    isManagerLoading
+  ) {
+    return <Spinner />;
   }
 
-  if (!user || role !== "manager") {
-    return <Navigate to="/dashboard" />;
+  if (!user || !isManager) {
+    return (
+      <Navigate
+        to="/dashboard"
+        state={location.pathname}
+        replace
+      />
+    );
   }
 
   return children;

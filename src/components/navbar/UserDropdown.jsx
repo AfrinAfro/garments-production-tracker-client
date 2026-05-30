@@ -1,36 +1,38 @@
-import { Link } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-
 const UserDropdown = () => {
-  const { user, logoutUser } =
-    useAuth();
-
   return (
-    <div className="dropdown dropdown-end">
-      <label tabIndex={0}>
-        <img
-          src={user?.photoURL}
-          alt="user"
-          className="h-12 w-12 rounded-full border-2 border-cyan-500 object-cover cursor-pointer"
-        />
-      </label>
-
-      <ul
-        tabIndex={0}
-        className="menu dropdown-content mt-3 w-60 rounded-2xl bg-[#0f172a] p-4 shadow"
+    <div className="flex items-center gap-3">
+      <button
+        className="
+          px-5 py-2.5
+          rounded-xl
+          text-sm
+          font-medium
+          border border-white/10
+          text-gray-300
+          hover:bg-white/5
+          transition-all duration-300
+        "
       >
-        <li>
-          <Link to="/dashboard">
-            Dashboard
-          </Link>
-        </li>
+        Login
+      </button>
 
-        <li>
-          <button onClick={logoutUser}>
-            Logout
-          </button>
-        </li>
-      </ul>
+      <button
+        className="
+          px-5 py-2.5
+          rounded-xl
+          text-sm
+          font-semibold
+          bg-gradient-to-r
+          from-cyan-500
+          to-blue-600
+          text-white
+          hover:scale-105
+          transition-all duration-300
+          shadow-lg shadow-cyan-500/20
+        "
+      >
+        Register
+      </button>
     </div>
   );
 };

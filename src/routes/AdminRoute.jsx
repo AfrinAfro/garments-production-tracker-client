@@ -1,17 +1,40 @@
-import { Navigate } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+
+import Spinner from "../components/loaders/Spinner";
+
 import useAuth from "../hooks/useAuth";
-import useUserRole from "../hooks/useUserRole";
 
-const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  const { role, loading: roleLoading } = useUserRole();
+import useAdmin from "../hooks/useAdmin";
 
-  if (loading || roleLoading) {
-    return <p className="text-center mt-10">Loading...</p>;
+const AdminRoute = ({
+  children,
+}) => {
+  const { user, loading } =
+    useAuth();
+
+  const [isAdmin, isAdminLoading] =
+    useAdmin();
+
+  const location = useLocation();
+
+  if (
+    loading ||
+    isAdminLoading
+  ) {
+    return <Spinner />;
   }
 
-  if (!user || role !== "admin") {
-    return <Navigate to="/dashboard" />;
+  if (!user || !isAdmin) {
+    return (
+      <Navigate
+        to="/dashboard"
+        state={location.pathname}
+        replace
+      />
+    );
   }
 
   return children;

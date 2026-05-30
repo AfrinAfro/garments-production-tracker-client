@@ -1,23 +1,36 @@
 import {
-  FiGrid,
-  FiUsers,
   FiBox,
-  FiShoppingBag,
-  FiPlusCircle,
   FiClipboard,
+  FiGrid,
+  FiHome,
+  FiLogOut,
+  FiPlusCircle,
+  FiShoppingBag,
   FiTruck,
   FiUser,
+  FiUsers,
 } from "react-icons/fi";
 
+import { Link } from "react-router-dom";
+
 import SidebarItem from "./SidebarItem";
+
 import useAdmin from "../../hooks/useAdmin";
+
 import useManager from "../../hooks/useManager";
+
 import useBuyer from "../../hooks/useBuyer";
+
+import useAuth from "../../hooks/useAuth";
 
 const Sidebar = () => {
   const [isAdmin] = useAdmin();
+
   const [isManager] = useManager();
+
   const [isBuyer] = useBuyer();
+
+  const { logoutUser } = useAuth();
 
   return (
     <aside
@@ -29,36 +42,45 @@ const Sidebar = () => {
         flex-col
         border-r
         border-white/10
-        bg-[#071028]
-        p-6
+        bg-[#081028]
+        px-6
+        py-8
       "
     >
-      {/* Logo */}
-      <div className="mb-10">
+      <Link to="/">
         <h1
           className="
-            text-3xl
+            text-4xl
             font-black
             text-white
           "
         >
-          Garments<span className="text-cyan-400">Pro</span>
+          Garments
+          <span className="text-cyan-400">
+            Pro
+          </span>
         </h1>
+      </Link>
 
-        <p className="mt-2 text-sm text-gray-400">
-          Production Tracker System
-        </p>
-      </div>
+      <p className="mt-2 text-sm text-gray-400">
+        Production Tracker System
+      </p>
 
-      {/* Menu */}
-      <div className="flex flex-col gap-3">
+      <div className="mt-12 flex flex-col gap-3">
         <SidebarItem
           to="/dashboard"
           icon={<FiGrid />}
           label="Dashboard"
         />
 
+        <SidebarItem
+          to="/"
+          icon={<FiHome />}
+          label="Home"
+        />
+
         {/* ADMIN */}
+
         {isAdmin && (
           <>
             <SidebarItem
@@ -78,10 +100,17 @@ const Sidebar = () => {
               icon={<FiShoppingBag />}
               label="All Orders"
             />
+
+            <SidebarItem
+              to="/dashboard/analytics"
+              icon={<FiGrid />}
+              label="Analytics"
+            />
           </>
         )}
 
         {/* MANAGER */}
+
         {isManager && (
           <>
             <SidebarItem
@@ -111,6 +140,7 @@ const Sidebar = () => {
         )}
 
         {/* BUYER */}
+
         {isBuyer && (
           <>
             <SidebarItem
@@ -122,18 +152,30 @@ const Sidebar = () => {
             <SidebarItem
               to="/dashboard/profile"
               icon={<FiUser />}
-              label="My Profile"
+              label="Profile"
             />
           </>
         )}
-
-        {/* COMMON */}
-        <SidebarItem
-          to="/dashboard/profile"
-          icon={<FiUser />}
-          label="Profile"
-        />
       </div>
+
+      <button
+        onClick={logoutUser}
+        className="
+          mt-auto
+          flex
+          items-center
+          gap-3
+          rounded-2xl
+          bg-red-500/20
+          px-5
+          py-4
+          text-red-400
+        "
+      >
+        <FiLogOut />
+
+        Logout
+      </button>
     </aside>
   );
 };

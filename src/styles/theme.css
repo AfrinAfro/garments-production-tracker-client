@@ -1,0 +1,51 @@
+:root {
+  --primary: #06b6d4;
+  --secondary: #0f172a;
+  --accent: #3b82f6;
+
+  --dark: #071028;
+  --light: #f8fafc;
+
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.08);
+
+  --shadow-primary: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.dark {
+  background: var(--dark);
+  color: var(--text-primary);
+}
+
+.light {
+  background: var(--light);
+  color: #111827;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+
+  backdrop-filter: blur(18px);
+
+  border: 1px solid
+    rgba(255, 255, 255, 0.08);
+}
+
+.gradient-primary {
+  background: linear-gradient(
+    135deg,
+    #06b6d4,
+    #2563eb
+  );
+}
+
+.shadow-primary {
+  box-shadow: var(--shadow-primary);
+}

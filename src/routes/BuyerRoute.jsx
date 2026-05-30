@@ -1,26 +1,42 @@
-import { Navigate } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+
+import Spinner from "../components/loaders/Spinner";
+
 import useAuth from "../hooks/useAuth";
-import useUserRole from "../hooks/useUserRole";
 
-const BuyerRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  const { role, loading: roleLoading } = useUserRole();
+import useBuyer from "../hooks/useBuyer";
 
-  // Loading state (auth or role check)
-  if (loading || roleLoading) {
+const BuyerRoute = ({
+  children,
+}) => {
+  const { user, loading } =
+    useAuth();
+
+  const [isBuyer, isBuyerLoading] =
+    useBuyer();
+
+  const location = useLocation();
+
+  if (
+    loading ||
+    isBuyerLoading
+  ) {
+    return <Spinner />;
+  }
+
+  if (!user || !isBuyer) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-gray-600 text-lg">Loading...</p>
-      </div>
+      <Navigate
+        to="/dashboard"
+        state={location.pathname}
+        replace
+      />
     );
   }
 
-  // Not logged in OR wrong role
-  if (!user || role !== "buyer") {
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  // Authorized access
   return children;
 };
 

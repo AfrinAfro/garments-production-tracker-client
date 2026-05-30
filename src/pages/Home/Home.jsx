@@ -1,31 +1,38 @@
 import Hero from "./Hero";
 import FeaturedProducts from "./FeaturedProducts";
+import HowItWorks from "./HowItWorks";
 import Workflow from "./Workflow";
 import Metrics from "./Metrics";
-import HowItWorks from "./HowItWorks";
 import Testimonials from "./Testimonials";
-import Newsletter from "./Newsletter";
 import GlobalReach from "./GlobalReach";
+import Newsletter from "./Newsletter";
 
 const Home = () => {
   return (
-    <div className="bg-[#020817] overflow-hidden">
+    <main className="bg-[#030712] text-white overflow-hidden">
+      
+      {/* HERO */}
       <Hero />
 
-      <FeaturedProducts />
+      {/* MAIN CONTENT */}
+      <div className="space-y-24 md:space-y-32 pb-24">
 
-      <Workflow />
+        <FeaturedProducts />
 
-      <Metrics />
+        <HowItWorks />
 
-      <HowItWorks />
+        <Workflow />
 
-      <GlobalReach />
+        <Metrics />
 
-      <Testimonials />
+        <Testimonials />
 
-      <Newsletter />
-    </div>
+        <GlobalReach />
+
+        <Newsletter />
+
+      </div>
+    </main>
   );
 };
 

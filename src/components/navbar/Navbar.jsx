@@ -1,54 +1,109 @@
 import { Link } from "react-router-dom";
+import { Menu } from "lucide-react";
 import NavLinks from "./NavLinks";
 import ThemeToggle from "./ThemeToggle";
 import UserDropdown from "./UserDropdown";
-import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const { user } = useAuth();
-
   return (
-    <div className="sticky top-0 z-50 border-b border-white/10 bg-[#071028]/90 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <Link
-          to="/"
-          className="text-3xl font-black text-white"
-        >
-          Garments
-          <span className="text-cyan-400">
-            Pro
-          </span>
-        </Link>
+    <header
+      className="
+        fixed
+        top-0
+        left-0
+        w-full
+        z-50
+        border-b border-white/10
+        bg-[#030712]/80
+        backdrop-blur-2xl
+      "
+    >
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        {/* Enforced flex alignment here ensures everything is locked perfectly to the 80px centerline */}
+        <div className="navbar h-20 p-0 flex items-center justify-between w-full">
+          
+          {/* LEFT LOGO */}
+          <div className="navbar-start flex-1 lg:flex-none">
+            <Link
+              to="/"
+              className="text-2xl font-black tracking-tight inline-flex items-center"
+            >
+              <span className="text-white">Garments</span>
+              <span className="text-cyan-400">Pro</span>
+            </Link>
+          </div>
 
-        <div className="hidden items-center gap-8 text-white lg:flex">
-          <NavLinks />
-        </div>
+          {/* CENTER DESKTOP LINKS */}
+          <div className="navbar-center hidden lg:flex">
+            <nav className="flex items-center gap-10">
+              <NavLinks />
+            </nav>
+          </div>
 
-        <div className="flex items-center gap-4">
-          <ThemeToggle />
+          {/* RIGHT UTILITIES */}
+          <div className="navbar-end flex-1 lg:flex-none justify-end gap-4 items-center">
+            {/* Theme selector - Visible everywhere */}
+            <div className="flex items-center">
+              <ThemeToggle />
+            </div>
 
-          {user ? (
-            <UserDropdown />
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="rounded-2xl bg-white/10 px-5 py-2 text-white"
+            {/* User Controls - Desktop only */}
+            <div className="hidden lg:flex items-center">
+              <UserDropdown />
+            </div>
+
+            {/* MOBILE NAVIGATION POPUP */}
+            <div className="dropdown dropdown-end lg:hidden flex items-center">
+              <label
+                tabIndex={0}
+                role="button"
+                className="
+                  btn btn-ghost
+                  p-2.5
+                  min-h-0
+                  h-auto
+                  border border-white/10
+                  bg-white/5
+                  hover:bg-white/10
+                  rounded-xl
+                  text-white
+                "
               >
-                Login
-              </Link>
+                <Menu size={20} />
+              </label>
 
-              <Link
-                to="/register"
-                className="rounded-2xl bg-cyan-500 px-5 py-2 font-semibold text-white"
+              <ul
+                tabIndex={0}
+                className="
+                  mt-4
+                  z-[100]
+                  p-5
+                  shadow-2xl
+                  dropdown-content
+                  rounded-2xl
+                  w-64
+                  bg-[#0B1120]
+                  border border-white/10
+                  backdrop-blur-2xl
+                  flex
+                  flex-col
+                  gap-4
+                "
               >
-                Register
-              </Link>
-            </>
-          )}
+                <nav className="flex flex-col gap-3">
+                  <NavLinks />
+                </nav>
+
+                <div className="pt-4 border-t border-white/10 block">
+                  <UserDropdown />
+                </div>
+              </ul>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

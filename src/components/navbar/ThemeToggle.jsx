@@ -1,27 +1,22 @@
-import { FiMoon, FiSun } from "react-icons/fi";
-import useTheme from "../../hooks/useTheme";
+import { Moon } from "lucide-react";
 
 const ThemeToggle = () => {
-  const { darkMode, setDarkMode } =
-    useTheme();
-
   return (
     <button
-      onClick={() =>
-        setDarkMode(!darkMode)
-      }
       className="
+        w-10 h-10
         rounded-full
-        bg-white/10
-        p-3
-        text-white
+        border border-white/10
+        bg-white/5
+        backdrop-blur-xl
+        flex items-center justify-center
+        text-gray-300
+        hover:text-cyan-400
+        hover:border-cyan-400/40
+        transition-all duration-300
       "
     >
-      {darkMode ? (
-        <FiSun />
-      ) : (
-        <FiMoon />
-      )}
+      <Moon size={18} />
     </button>
   );
 };

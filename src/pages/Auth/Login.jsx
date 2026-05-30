@@ -1,68 +1,209 @@
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 import toast from "react-hot-toast";
+
 import useAuth from "../../hooks/useAuth";
-import { loginUser } from "../../services/authService";
+
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
-  const { loginUser: firebaseLogin } = useAuth();
+  useTitle("Login");
+
+  const {
+    loginUser,
+    googleLogin,
+  } = useAuth();
+
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
+  const location = useLocation();
 
-  const handleLogin = async (e) => {
+  const from =
+    location?.state || "/dashboard";
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const handleLogin = async e => {
     e.preventDefault();
+
     setLoading(true);
 
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const form = e.target;
+
+    const email = form.email.value;
+
+    const password =
+      form.password.value;
 
     try {
-      // Firebase login (optional layer)
-      await firebaseLogin(email, password);
+      await loginUser(
+        email,
+        password
+      );
 
-      // Backend login (JWT cookie)
-      const res = await loginUser({ email, password });
+      toast.success(
+        "Login Successful"
+      );
 
-      toast.success(res.message);
-
-      navigate("/dashboard");
+      navigate(from);
     } catch (err) {
-      toast.error(err.response?.data?.message || "Login failed");
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  const handleGoogleLogin =
+    async () => {
+      try {
+        await googleLogin();
+
+        toast.success(
+          "Login Successful"
+        );
+
+        navigate(from);
+      } catch (err) {
+        toast.error(err.message);
+      }
+    };
+
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <form
-        onSubmit={handleLogin}
-        className="bg-white p-6 rounded-xl shadow-md w-96"
+    <div
+      className="
+        flex
+        min-h-screen
+        items-center
+        justify-center
+        px-6
+      "
+    >
+      <div
+        className="
+          w-full
+          max-w-md
+          rounded-[32px]
+          border
+          border-white/10
+          bg-white/5
+          p-10
+          backdrop-blur-xl
+        "
       >
-        <h2 className="text-xl font-bold mb-4">Login</h2>
+        <h1
+          className="
+            text-center
+            text-4xl
+            font-black
+            text-white
+          "
+        >
+          Welcome Back
+        </h1>
 
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          className="w-full border p-2 mb-3"
-        />
+        <p
+          className="
+            mt-3
+            text-center
+            text-gray-400
+          "
+        >
+          Login to your account
+        </p>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          className="w-full border p-2 mb-3"
-        />
+        <form
+          onSubmit={handleLogin}
+          className="mt-10 space-y-5"
+        >
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            required
+            className="
+              w-full
+              rounded-2xl
+              border
+              border-white/10
+              bg-white/10
+              p-4
+              text-white
+              outline-none
+            "
+          />
+
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+            className="
+              w-full
+              rounded-2xl
+              border
+              border-white/10
+              bg-white/10
+              p-4
+              text-white
+              outline-none
+            "
+          />
+
+          <button
+            disabled={loading}
+            className="
+              w-full
+              rounded-2xl
+              bg-cyan-500
+              py-4
+              font-semibold
+              text-white
+            "
+          >
+            {loading
+              ? "Logging..."
+              : "Login"}
+          </button>
+        </form>
 
         <button
-          disabled={loading}
-          className="w-full bg-indigo-600 text-white p-2 rounded"
+          onClick={handleGoogleLogin}
+          className="
+            mt-5
+            w-full
+            rounded-2xl
+            border
+            border-white/10
+            py-4
+            text-white
+          "
         >
-          {loading ? "Logging in..." : "Login"}
+          Continue With Google
         </button>
-      </form>
+
+        <p
+          className="
+            mt-6
+            text-center
+            text-gray-400
+          "
+        >
+          New here?
+
+          <Link
+            to="/register"
+            className="
+              ml-2
+              text-cyan-400
+            "
+          >
+            Register
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
