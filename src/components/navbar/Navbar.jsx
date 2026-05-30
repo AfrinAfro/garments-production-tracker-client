@@ -19,10 +19,10 @@ const Navbar = () => {
       "
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        {/* Enforced flex alignment here ensures everything is locked perfectly to the 80px centerline */}
+        
         <div className="navbar h-20 p-0 flex items-center justify-between w-full">
           
-          {/* LEFT LOGO */}
+          
           <div className="navbar-start flex-1 lg:flex-none">
             <Link
               to="/"
@@ -33,26 +33,26 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* CENTER DESKTOP LINKS */}
+         
           <div className="navbar-center hidden lg:flex">
             <nav className="flex items-center gap-10">
               <NavLinks />
             </nav>
           </div>
 
-          {/* RIGHT UTILITIES */}
+        
           <div className="navbar-end flex-1 lg:flex-none justify-end gap-4 items-center">
-            {/* Theme selector - Visible everywhere */}
+            
             <div className="flex items-center">
               <ThemeToggle />
             </div>
 
-            {/* User Controls - Desktop only */}
+          
             <div className="hidden lg:flex items-center">
               <UserDropdown />
             </div>
 
-            {/* MOBILE NAVIGATION POPUP */}
+            
             <div className="dropdown dropdown-end lg:hidden flex items-center">
               <label
                 tabIndex={0}

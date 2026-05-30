@@ -1,8 +1,6 @@
 import axiosPublic from "./axiosPublic";
 
-/**
- * Save user into database
- */
+
 export const saveUser = async userData => {
   const res = await axiosPublic.post(
     "/users",
@@ -12,9 +10,7 @@ export const saveUser = async userData => {
   return res.data;
 };
 
-/**
- * Get current user role + status
- */
+
 export const getUserRole = async email => {
   const res = await axiosPublic.get(
     `/users/role/${email}`
@@ -23,9 +19,7 @@ export const getUserRole = async email => {
   return res.data;
 };
 
-/**
- * Generate JWT cookie
- */
+
 export const generateJWT = async email => {
   const res = await axiosPublic.post(
     "/jwt",
@@ -38,9 +32,7 @@ export const generateJWT = async email => {
   return res.data;
 };
 
-/**
- * Logout and clear cookie
- */
+
 export const logoutUserApi = async () => {
   const res = await axiosPublic.post(
     "/logout",
@@ -53,9 +45,7 @@ export const logoutUserApi = async () => {
   return res.data;
 };
 
-/**
- * Update user role/status
- */
+
 export const updateUserRole = async (
   id,
   updatedData
@@ -68,9 +58,7 @@ export const updateUserRole = async (
   return res.data;
 };
 
-/**
- * Get all users
- */
+
 export const getAllUsers = async () => {
   const res = await axiosPublic.get(
     "/users"
@@ -79,9 +67,7 @@ export const getAllUsers = async () => {
   return res.data;
 };
 
-/**
- * Get single user
- */
+
 export const getSingleUser = async email => {
   const res = await axiosPublic.get(
     `/users/${email}`

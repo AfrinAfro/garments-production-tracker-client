@@ -1,17 +1,11 @@
 @import "tailwindcss";
 
-/* CRITICAL TAILWIND v4 DIRECTIVE:
-  Forces the compiler to read deep inside your /src subdirectories,
-  ensuring it finds files like /pages/Home/Hero.jsx and registers 
-  responsive width/grid systems properly!
-*/
+
 @source "./**/*.{js,jsx,ts,tsx}";
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght=100..900&display=swap");
 
-/* =========================
-   GLOBAL RESET FIX
-========================= */
+
 @layer base {
   * {
     font-family: "Inter", sans-serif;
@@ -28,17 +22,13 @@
   }
 }
 
-/* =========================
-   SELECTION
-========================= */
+
 ::selection {
   background: #8b5cf6;
   color: white;
 }
 
-/* =========================
-   SCROLLBAR
-========================= */
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -56,9 +46,7 @@
   border-radius: 999px;
 }
 
-/* =========================
-   GLASS EFFECT
-========================= */
+
 .glass {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(16px);
@@ -67,9 +55,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
-/* =========================
-   PREMIUM CARD
-========================= */
+
 .premium-card {
   border-radius: 24px;
   padding: 24px;
@@ -85,9 +71,7 @@
   box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
 }
 
-/* =========================
-   BUTTONS
-========================= */
+
 .primary-btn {
   padding: 14px 28px;
   border-radius: 18px;
@@ -125,9 +109,7 @@
   transform: translateY(-2px);
 }
 
-/* =========================
-   TEXT GRADIENT
-========================= */
+
 .gradient-text {
   background: linear-gradient(
     to right,
@@ -138,25 +120,19 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* =========================
-   SECTION
-========================= */
+
 .section-padding {
   padding: 80px 20px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
+
 .main-container {
   width: 100%;
   max-width: 1280px;
   margin: auto;
 }
 
-/* =========================
-   BACKGROUND LIGHTS
-========================= */
+
 .bg-light {
   position: absolute;
   width: 500px;
@@ -179,9 +155,7 @@
   z-index: -1;
 }
 
-/* =========================
-   INPUTS
-========================= */
+
 .input-style {
   width: 100%;
   padding: 14px 18px;
@@ -199,9 +173,7 @@
   box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
 }
 
-/* =========================
-   TABLE
-========================= */
+
 .table-glass {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
@@ -209,9 +181,7 @@
   border-radius: 24px;
 }
 
-/* =========================
-   ANIMATIONS
-========================= */
+
 .fade-up {
   animation: fadeUp 0.7s ease forwards;
 }
@@ -227,9 +197,7 @@
   }
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+
 .sidebar-item {
   display: flex;
   align-items: center;
@@ -244,9 +212,7 @@
   transform: translateX(4px);
 }
 
-/* =========================
-   HERO OVERLAY
-========================= */
+
 .hero-overlay {
   background: linear-gradient(
     to bottom,
@@ -255,9 +221,7 @@
   );
 }
 
-/* =========================
-   IMAGE EFFECT
-========================= */
+
 .image-hover {
   transition: 0.4s ease;
 }
@@ -266,9 +230,7 @@
   transform: scale(1.05);
 }
 
-/* =========================
-   BADGE
-========================= */
+
 .badge-premium {
   padding: 8px 16px;
   border-radius: 999px;
